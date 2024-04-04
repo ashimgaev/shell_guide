@@ -72,6 +72,17 @@ test_file() {
   fi
 }
 
+echo "#############"
+echo "Test files..."
+VAR_PARAM_1='./dir_1'
+test_file ${VAR_PARAM_1}
+echo "_____"
+VAR_PARAM_1='./dir_1/file_1.txt'
+test_file ${VAR_PARAM_1}
+echo "_____"
+VAR_PARAM_1='./dir_1/file_not_exists.txt'
+test_file ${VAR_PARAM_1}
+
 ######################################
 # $1 - param name
 # $2 - param value
@@ -99,6 +110,19 @@ test_int() {
     echo "${PARAM_NAME} greater than 1"
   fi
 }
+
+# set defaul vlues for variables
+VAR_PARAM_1=0
+echo "#############"
+echo "Test integers..."
+VAR_PARAM_1=1
+test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
+VAR_PARAM_1=0
+test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
+VAR_PARAM_1=2
+test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
+
+
 
 ######################################
 # $1 - param name
@@ -144,18 +168,6 @@ test_str() {
   fi
 }
 
-
-# set defaul vlues for variables
-VAR_PARAM_1=0
-echo "#############"
-echo "Test integers..."
-VAR_PARAM_1=1
-test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
-VAR_PARAM_1=0
-test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
-VAR_PARAM_1=2
-test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
-
 echo "#############"
 echo "Test strings..."
 VAR_PARAM_1=
@@ -164,14 +176,3 @@ VAR_PARAM_1=abc
 test_str 'VAR_PARAM_1' ${VAR_PARAM_1}
 VAR_PARAM_1=cba
 test_str 'VAR_PARAM_1' ${VAR_PARAM_1}
-
-echo "#############"
-echo "Test files..."
-VAR_PARAM_1='./dir_1'
-test_file ${VAR_PARAM_1}
-echo "_____"
-VAR_PARAM_1='./dir_1/file_1.txt'
-test_file ${VAR_PARAM_1}
-echo "_____"
-VAR_PARAM_1='./dir_1/file_not_exists.txt'
-test_file ${VAR_PARAM_1}
