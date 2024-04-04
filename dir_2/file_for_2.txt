@@ -1,0 +1,1 @@
+ls: cannot access 'file_not_exists.txt': No such file or directory
