@@ -72,20 +72,19 @@ test_file() {
   fi
 }
 
-echo "#############"
-echo "Test files..."
-VAR_PARAM_1='./dir_1'
-test_file ${VAR_PARAM_1}
-echo "_____"
-VAR_PARAM_1='./dir_1/file_1.txt'
-test_file ${VAR_PARAM_1}
-echo "_____"
-VAR_PARAM_1='./dir_1/file_not_exists.txt'
-test_file ${VAR_PARAM_1}
+echo "#######  Test files  ######"
+test_file ${G_DIR_1}
+separator
+
+test_file ${G_DIR_1_FILE_1}
+separator
+
+test_file ${G_FILE_NOT_EXISTS}
+separator
 
 ######################################
-# $1 - param name
-# $2 - param value
+# $1 - param_1 name
+# $2 - param_1 value
 ######################################
 test_int() {
   # $1	first argument, $2 - second etc...
@@ -113,16 +112,18 @@ test_int() {
 
 # set defaul vlues for variables
 VAR_PARAM_1=0
-echo "#############"
-echo "Test integers..."
+echo "#######  Test integers  ######"
 VAR_PARAM_1=1
 test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
+separator
+
 VAR_PARAM_1=0
 test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
+separator
+
 VAR_PARAM_1=2
 test_int 'VAR_PARAM_1' ${VAR_PARAM_1}
-
-
+separator
 
 ######################################
 # $1 - param name
@@ -168,11 +169,64 @@ test_str() {
   fi
 }
 
-echo "#############"
-echo "Test strings..."
+echo "#######  Test strings  ######"
 VAR_PARAM_1=
 test_str 'VAR_PARAM_1' ${VAR_PARAM_1}
+separator
+
 VAR_PARAM_1=abc
 test_str 'VAR_PARAM_1' ${VAR_PARAM_1}
+separator
+
 VAR_PARAM_1=cba
 test_str 'VAR_PARAM_1' ${VAR_PARAM_1}
+separator
+
+######################################
+# $1 - param_1 value
+# $2 - param_2 value
+######################################
+test_for_null() {
+  PARAM_1_VAL=$1
+  PARAM_2_VAL=$2
+  
+  # PARAM_1_VAL not null
+  if [ ! -z $PARAM_1_VAL ]
+  then
+    echo "PARAM_1_VAL is not NULL"
+  else 
+    echo "PARAM_1_VAL is NULL"
+  fi
+
+  # PARAM_2_VAL not null
+  if [ ! -z $PARAM_2_VAL ]
+  then
+    echo "PARAM_2_VAL is not NULL"
+  else 
+    echo "PARAM_2_VAL is NULL"
+  fi
+
+  # PARAM_1_VAL and PARAM_2_VAL are null
+  if [ -z $PARAM_1_VAL ] && [ -z $PARAM_2_VAL ]
+  then
+    echo "PARAM_1_VAL and PARAM_2_VAL are NULL"
+  fi
+
+  # PARAM_1_VAL or PARAM_2_VAL are null
+  if [ -z $PARAM_1_VAL ] || [ -z $PARAM_2_VAL ]
+  then
+    echo "PARAM_1_VAL or PARAM_2_VAL are NULL"
+  fi
+}
+echo "#######  Test for NULL  ######"
+VAR_PARAM_1=1
+test_for_null ${VAR_PARAM_1}
+separator
+
+VAR_PARAM_1=1
+VAR_PARAM_2=
+test_for_null ${VAR_PARAM_1} ${VAR_PARAM_2}
+separator
+
+test_for_null
+separator
